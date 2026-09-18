@@ -46,6 +46,7 @@ export const Header: React.FC = () => {
   ];
 
   const patientCareLinks = [
+    { label: 'Book an Appointment', path: '/book-appointment', icon: Calendar, desc: 'Instant specialist scheduling', isBooking: true },
     { label: 'Health Packages', path: '/packages', icon: Package, desc: 'Preventative checkup plans' },
     { label: 'Patient Services & TPA', path: '/patient-services', icon: HeartHandshake, desc: 'Insurance, billing & roadmap' },
     { label: 'Frequently Asked Questions', path: '/faq', icon: HelpCircle, desc: 'Admissions, timings & reports' },
@@ -150,7 +151,11 @@ export const Header: React.FC = () => {
                         key={item.path}
                         onClick={() => {
                           setPatientCareDropdown(false);
-                          navigate(item.path);
+                          if (item.isBooking) {
+                            openBookingModal();
+                          } else {
+                            navigate(item.path);
+                          }
                         }}
                         className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 transition-colors flex items-start gap-2.5 group"
                       >
@@ -188,12 +193,12 @@ export const Header: React.FC = () => {
             </button>
           </nav>
 
-          {/* Desktop Right Actions: Compact & In-Frame */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
+          {/* Desktop Right Actions: Emergency & Find Doctor (Fits cleanly in frame) */}
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             {/* Emergency Button */}
             <button
               onClick={() => navigate('/emergency')}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200/70 transition-colors shadow-sm whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200/70 transition-colors shadow-sm whitespace-nowrap"
               title="24/7 Emergency Care"
             >
               <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
@@ -203,19 +208,10 @@ export const Header: React.FC = () => {
             {/* Find Doctor */}
             <button
               onClick={() => navigate('/doctors')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-navy-950 hover:bg-slate-100 border border-slate-200 transition-colors whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-navy-950 hover:bg-slate-100 border border-slate-200 transition-colors whitespace-nowrap"
             >
               <Search className="w-3.5 h-3.5 text-slate-500" />
               <span>Find Doctor</span>
-            </button>
-
-            {/* Book Appointment CTA */}
-            <button
-              onClick={() => openBookingModal()}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-navy-900 to-navy-800 hover:from-navy-800 hover:to-navy-700 shadow-sm hover:shadow-md transition-all whitespace-nowrap"
-            >
-              <Calendar className="w-3.5 h-3.5 text-teal-400" />
-              <span>Book Appointment</span>
             </button>
           </div>
 
