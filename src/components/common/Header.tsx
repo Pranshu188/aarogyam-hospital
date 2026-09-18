@@ -215,16 +215,8 @@ export const Header: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile Right Bar (Menu toggle + quick appointment button) */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <button
-              onClick={() => openBookingModal()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-navy-900 shadow-sm"
-            >
-              <Calendar className="w-3.5 h-3.5 text-teal-400" />
-              <span>Book Visit</span>
-            </button>
-
+          {/* Mobile Right Bar (Menu toggle) */}
+          <div className="flex items-center lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-slate-700 hover:text-navy-900 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none"
